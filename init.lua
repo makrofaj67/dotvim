@@ -21,10 +21,12 @@ vim.opt.rtp:prepend(lazypath)
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
+
 -- Setup lazy.nvim
 require("lazy").setup({
   spec = {
     -- add your plugins here
+    { import = "plugins" }, 
   },
   {
   root = vim.fn.stdpath("data") .. "/lazy", -- directory where plugins will be installed
@@ -261,3 +263,5 @@ require("lazy").setup({
   -- automatically check for plugin updates
   checker = { enabled = true },
 })
+require("lazy").setup("plugins")
+require("core").setup()
