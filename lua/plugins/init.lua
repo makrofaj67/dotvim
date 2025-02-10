@@ -26,5 +26,6 @@ return {
 	require("plugins.precognition"),
 	require("plugins.hardtime"),
 	require("plugins.avante"),
+	require("plugins.keyanalyzer"),
 	-- require("plugins.menu"),
 }
