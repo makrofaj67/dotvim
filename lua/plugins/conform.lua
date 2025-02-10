@@ -1,11 +1,11 @@
 return {
-	{
+	
     'stevearc/conform.nvim',
     event = { 'BufWritePre' },
     cmd = { 'ConformInfo' },
     keys = {
       {
-        '<leader>f',
+        '<leader>fo',
         function()
           require('conform').format { async = true, lsp_format = 'fallback' }
         end,
@@ -40,5 +40,5 @@ return {
         -- javascript = { "prettierd", "prettier", stop_after_first = true },
       },
     },
-  },
+  
 }
