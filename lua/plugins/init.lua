@@ -19,7 +19,7 @@ return {
 	require("plugins.debugger"),
 	require("plugins.modicator"),
 	require("plugins.lualine"),
-	require("plugins.bufferline"),
+	-- require("plugins.bufferline"),
 	require("plugins.gitsigns"),
 	require("plugins.indent_blankline"),
 	require("plugins.42"),
@@ -28,5 +28,6 @@ return {
 	require("plugins.avante"),
 	require("plugins.keyanalyzer"),
 	require("plugins.neoscroll"),
+	require("plugins.barbar"),
 	-- require("plugins.menu"),
 }
