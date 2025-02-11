@@ -27,6 +27,5 @@ return {
 	require("plugins.hardtime"),
 	require("plugins.avante"),
 	require("plugins.keyanalyzer"),
-	-- require("plugins.staycentered"),
 	-- require("plugins.menu"),
 }
