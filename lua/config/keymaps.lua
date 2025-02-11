@@ -1,3 +1,6 @@
+require("config.smartescape")
+vim.g.smart_escape_timeout = 200 -- milliseconds
+vim.g.smart_escape_visual_feedback = true
 -- -- Disable the spacebar key's default behavior in Normal and Visual modes
 -- vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
 --
