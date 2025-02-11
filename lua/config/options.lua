@@ -53,7 +53,8 @@ o.expandtab = false
 o.relativenumber = true
 o.number = true
 o.ruler = true
-o.scrolloff = 5
+o.scrolloff = 20
+o.signcolumn = "yes"
 o.foldmethod = "manual"
 o.signcolumn = "yes"
 -- o.statuscolumn = "%s %l %r "
@@ -66,4 +67,4 @@ if g.neovide then
 	g.neovide_scale_factor = 1.0
 end
 
-vim.cmd("cd /home/luka/Desktop/push_swap/")
+vim.cmd("cd /home/luka/.config/nvim")

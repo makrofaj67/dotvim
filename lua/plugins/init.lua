@@ -29,5 +29,6 @@ return {
 	require("plugins.keyanalyzer"),
 	require("plugins.neoscroll"),
 	require("plugins.barbar"),
+	require("plugins.stay_centered"),
 	-- require("plugins.menu"),
 }
