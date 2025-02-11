@@ -140,7 +140,7 @@ return {
 			rename = { enabled = true },
 			scope = { enabled = true },
 			scratch = { enabled = true },
-			-- scroll = { enabled = true },
+			scroll = { enabled = true },
 			-- statuscolumn = { enabled = true },
 			terminal = { enabled = true },
 			toggle = { enabled = true },

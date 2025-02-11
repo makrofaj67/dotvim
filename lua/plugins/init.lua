@@ -29,6 +29,9 @@ return {
 	require("plugins.keyanalyzer"),
 	require("plugins.neoscroll"),
 	require("plugins.barbar"),
+	-- require("plugins.heirline"),
 	require("plugins.stay_centered"),
+	-- require("plugins.winseperator"),
 	-- require("plugins.menu"),
+	-- require("plugins.winows"),
 }
