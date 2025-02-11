@@ -27,5 +27,6 @@ return {
 	require("plugins.hardtime"),
 	require("plugins.avante"),
 	require("plugins.keyanalyzer"),
+	require("plugins.neoscroll"),
 	-- require("plugins.menu"),
 }

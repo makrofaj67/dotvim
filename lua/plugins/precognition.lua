@@ -18,10 +18,10 @@ return {
 			E = { text = "E", prio = 5 },
 		},
 		gutterHints = {
-			G = { text = "G", prio = 10 },
-			gg = { text = "gg", prio = 9 },
-			PrevParagraph = { text = "{", prio = 8 },
-			NextParagraph = { text = "}", prio = 8 },
+			G = { text = "G", prio = 0 },
+			gg = { text = "gg", prio = 0 },
+			PrevParagraph = { text = "{", prio = 0 },
+			NextParagraph = { text = "}", prio = 0 },
 		},
 		disabled_fts = {
 			"startify",

@@ -9,8 +9,8 @@ return {
 		lazy = false,
 		config = function()
 			require("norminette").setup({
-				--	norm_keybind = "<leader>n",
-				--	size_keybind = "<leader>ns",
+				norm_keybind = "<leader>m",
+				size_keybind = "<leader>ms",
 				diagnost_color = "#00ff00",
 				show_size = true,
 			})
