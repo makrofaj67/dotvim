@@ -1,23 +1,20 @@
----@class snacks.animate.Config
----@field easing? snacks.animate.easing|snacks.animate.easing.Fn
-
 return {
 	{
 		"folke/snacks.nvim",
 		priority = 1000,
 		lazy = false,
-		---@type snacks.Config
+
 		opts = {
 			animate = { enabled = true },
 			bigfile = { enabled = true },
 			bufdelete = { enabled = true },
 			dashboard = {
 				width = 60,
-				row = nil, -- dashboard position. nil for center
-				col = nil, -- dashboard position. nil for center
-				pane_gap = 4, -- empty columns between vertical panes
-				autokeys = "1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", -- autokey sequence
-				-- These settings are used by some built-in sections
+				row = nil,
+				col = nil,
+				pane_gap = 4,
+				autokeys = "1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ",
+
 				preset = {
 					header = [[
 ▀█████████▄   ▄█          ▄████████  ▄████████    ▄█   ▄█▄ 
@@ -53,65 +50,43 @@ return {
 			gitbrowse = { enabled = true },
 			image = { enabled = true },
 			indent = {
-				---@class snacks.indent.Config
-				---@field enabled? boolean
+
 				indent = {
 					priority = 1,
-					enabled = true, -- enable indent guides
+					enabled = true,
 					char = "│",
-					only_scope = false, -- only show indent guides of the scope
-					only_current = false, -- only show indent guides in the current window
-					hl = "SnacksIndent", ---@type string|string[] hl groups for indent guides
-					-- can be a list of hl groups to cycle through
-					-- hl = {
-					--     "SnacksIndent1",
-					--     "SnacksIndent2",
-					--     "SnacksIndent3",
-					--     "SnacksIndent4",
-					--     "SnacksIndent5",
-					--     "SnacksIndent6",
-					--     "SnacksIndent7",
-					--     "SnacksIndent8",
-					-- },
+					only_scope = false,
+					only_current = false,
+					hl = "SnacksIndent",
 				},
-				-- animate scopes. Enabled by default for Neovim >= 0.10
-				-- Works on older versions but has to trigger redraws during animation.
-				---@class snacks.indent.animate: snacks.animate.Config
-				---@field enabled? boolean
-				--- * out: animate outwards from the cursor
-				--- * up: animate upwards from the cursor
-				--- * down: animate downwards from the cursor
-				--- * up_down: animate up or down based on the cursor position
-				---@field style? "out"|"up_down"|"down"|"up"
+
 				animate = {
 					enabled = vim.fn.has("nvim-0.10") == 1,
 					style = "out",
 					easing = "linear",
 					duration = {
-						step = 20, -- ms per step
-						total = 500, -- maximum duration
+						step = 20,
+						total = 500,
 					},
 				},
-				---@class snacks.indent.Scope.Config: snacks.scope.Config
+
 				scope = {
-					enabled = true, -- enable highlighting the current scope
+					enabled = true,
 					priority = 200,
 					char = "│",
-					underline = false, -- underline the start of the scope
-					only_current = false, -- only show scope in the current window
-					hl = "SnacksIndentScope", ---@type string|string[] hl group for scopes
+					underline = false,
+					only_current = false,
+					hl = "SnacksIndentScope",
 				},
 				chunk = {
-					-- when enabled, scopes will be rendered as chunks, except for the
-					-- top-level scope which will be rendered as a scope.
+
 					enabled = true,
-					-- only show chunk scopes in the current window
+
 					only_current = false,
 					priority = 200,
-					hl = "SnacksIndentChunk", ---@type string|string[] hl group for chunk scopes
+					hl = "SnacksIndentChunk",
 					char = {
-						-- corner_top = "┌",
-						-- corner_bottom = "└",
+
 						corner_top = "╭",
 						corner_bottom = "╰",
 						horizontal = "─",
@@ -119,7 +94,7 @@ return {
 						arrow = ">",
 					},
 				},
-				-- filter for buffers to enable indent guides
+
 				filter = function(buf)
 					return vim.g.snacks_indent ~= false
 						and vim.b[buf].snacks_indent ~= false
@@ -141,7 +116,7 @@ return {
 			scope = { enabled = true },
 			scratch = { enabled = true },
 			scroll = { enabled = true },
-			-- statuscolumn = { enabled = true },
+
 			terminal = { enabled = true },
 			toggle = { enabled = true },
 			util = { enabled = true },
@@ -149,13 +124,11 @@ return {
 			words = { enabled = true },
 			zen = { enabled = true },
 			styles = {
-				notification = {
-					-- wo = { wrap = true } -- Wrap notifications
-				},
+				notification = {},
 			},
 		},
 		keys = {
-			-- Top Pickers & Explorer
+
 			{
 				"<leader><space>",
 				function()
@@ -198,7 +171,7 @@ return {
 				end,
 				desc = "File Explorer",
 			},
-			-- find
+
 			{
 				"<leader>fb",
 				function()
@@ -241,7 +214,7 @@ return {
 				end,
 				desc = "Recent",
 			},
-			-- git
+
 			{
 				"<leader>gb",
 				function()
@@ -291,7 +264,7 @@ return {
 				end,
 				desc = "Git Log File",
 			},
-			-- Grep
+
 			{
 				"<leader>sb",
 				function()
@@ -321,7 +294,7 @@ return {
 				desc = "Visual selection or word",
 				mode = { "n", "x" },
 			},
-			-- search
+
 			{
 				'<leader>s"',
 				function()
@@ -469,7 +442,7 @@ return {
 				end,
 				desc = "Colorschemes",
 			},
-			-- LSP
+
 			{
 				"gd",
 				function()
@@ -520,7 +493,7 @@ return {
 				end,
 				desc = "LSP Workspace Symbols",
 			},
-			-- Other
+
 			{
 				"<leader>z",
 				function()
@@ -645,16 +618,14 @@ return {
 			vim.api.nvim_create_autocmd("User", {
 				pattern = "VeryLazy",
 				callback = function()
-					-- Setup some globals for debugging (lazy-loaded)
 					_G.dd = function(...)
 						Snacks.debug.inspect(...)
 					end
 					_G.bt = function()
 						Snacks.debug.backtrace()
 					end
-					vim.print = _G.dd -- Override print to use snacks for `:=` command
+					vim.print = _G.dd
 
-					-- Create some toggle mappings
 					Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>us")
 					Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
 					Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>uL")

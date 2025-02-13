@@ -16,7 +16,7 @@ return {
 			"WhoIsSethDaniel/mason-tool-installer.nvim",
 			{ "j-hui/fidget.nvim", opts = {} },
 			"hrsh7th/cmp-nvim-lsp",
-			-- Add snacks as a dependency
+
 			"folke/snacks.nvim",
 		},
 		config = function()
@@ -28,7 +28,6 @@ return {
 						vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
 					end
 
-					-- Modified keymaps to use snacks instead of telescope
 					map("gd", vim.lsp.buf.definition, "[G]oto [D]efinition")
 					map("gr", vim.lsp.buf.references, "[G]oto [R]eferences")
 					map("gI", vim.lsp.buf.implementation, "[G]oto [I]mplementation")
@@ -39,7 +38,6 @@ return {
 					map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction", { "n", "x" })
 					map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
 
-					-- Rest of the highlight configuration remains the same
 					local client = vim.lsp.get_client_by_id(event.data.client_id)
 					if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
 						local highlight_augroup =
@@ -73,7 +71,6 @@ return {
 				end,
 			})
 
-			-- Rest of the configuration remains the same
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
 			capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 

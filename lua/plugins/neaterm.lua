@@ -5,7 +5,7 @@ return {
 	event = "VeryLazy",
 	opts = {
 		default_opts = {
-			-- Terminal settings
+
 			shell = vim.o.shell,
 			float_width = 0.5,
 			float_height = 0.4,
@@ -13,18 +13,15 @@ return {
 			resize_amount = 2,
 			border = "rounded",
 
-			-- Appearance
 			highlights = {
 				normal = "Normal",
 				border = "FloatBorder",
 				title = "Title",
 			},
 
-			-- Window management
 			min_width = 20,
 			min_height = 3,
 
-			-- custom terminals
 			terminals = {
 				ranger = {
 					name = "Ranger",
@@ -68,7 +65,6 @@ return {
 				},
 			},
 
-			-- Default keymaps
 			use_default_keymaps = true,
 			keymaps = {
 				toggle = "<A-t>",
@@ -97,7 +93,6 @@ return {
 				repl_restart = "<leader>rR",
 			},
 
-			-- REPL configurations
 			repl = {
 				float_width = 0.6,
 				float_height = 0.4,
@@ -107,16 +102,12 @@ return {
 				update_interval = 5000,
 			},
 
-			-- REPL language configurations
 			repl_configs = {
 				python = {
 					name = "Python (IPython)",
 					cmd = "ipython --no-autoindent --colors='Linux'",
-					startup_cmds = {
-						-- "import sys",
-						-- "sys.ps1 = 'In []: '",
-						-- "sys.ps2 = '   ....: '",
-					},
+
+					startup_cmds = {},
 					get_variables_cmd = "whos",
 					inspect_variable_cmd = "?",
 					exit_cmd = "exit()",
@@ -124,10 +115,7 @@ return {
 				r = {
 					name = "R (Radian)",
 					cmd = "radian",
-					startup_cmds = {
-						-- "options(width = 80)",
-						-- "options(prompt = 'R> ')",
-					},
+					startup_cmds = {},
 					get_variables_cmd = "ls.str()",
 					inspect_variable_cmd = "str(",
 					exit_cmd = "q(save='no')",
@@ -156,7 +144,6 @@ return {
 				},
 			},
 
-			-- Terminal features
 			features = {
 				auto_insert = true,
 				auto_close = true,
@@ -168,7 +155,6 @@ return {
 				shell_integration = true,
 			},
 		},
-		-- Your custom options here (optional)
 	},
 	dependencies = {
 		"nvim-lua/plenary.nvim",

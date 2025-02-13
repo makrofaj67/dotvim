@@ -1,7 +1,3 @@
--- Adds git related signs to the gutter, as well as utilities for managing changes
--- NOTE: gitsigns is already included in init.lua but contains only the base
--- config. This will add also the recommended keymaps.
-
 return {
 	"romgrk/barbar.nvim",
 	dependencies = {
@@ -27,7 +23,7 @@ return {
 		set_colors()
 
 		require("barbar").setup({
-			animation = false, -- Disabled animations
+			animation = false,
 			auto_hide = false,
 			tabpages = true,
 			clickable = true,
@@ -39,7 +35,7 @@ return {
 				buffer_index = false,
 				buffer_number = false,
 				button = "λ",
-				preset = "slanted", -- Re-enabled slanted preset
+				preset = "slanted",
 				diagnostics = {
 					[vim.diagnostic.severity.ERROR] = { enabled = false },
 					[vim.diagnostic.severity.WARN] = { enabled = false },
@@ -55,7 +51,7 @@ return {
 					custom_colors = false,
 					enabled = true,
 				},
-				separator = { left = "", right = "" }, -- Removed separators
+				separator = { left = "", right = "" },
 				separator_at_end = true,
 			},
 			sidebar_filetypes = {
@@ -87,7 +83,6 @@ return {
 			pcall(vim.api.nvim_set_hl, 0, name, opts)
 		end
 
-		-- Set background colors for all parts of each tab state
 		safe_set_hl("BufferCurrent", { fg = colors.fg_bright, bg = colors.bg, bold = true })
 		safe_set_hl("BufferCurrentMod", { fg = colors.yellow, bg = colors.bg, bold = true })
 		safe_set_hl("BufferCurrentSign", { fg = colors.accent, bg = colors.bg })
@@ -95,7 +90,6 @@ return {
 		safe_set_hl("BufferCurrentERROR", { fg = colors.red, bg = colors.bg })
 		safe_set_hl("BufferCurrentWARN", { fg = colors.yellow, bg = colors.bg })
 
-		-- Make visible and inactive tabs look the same
 		safe_set_hl("BufferVisible", { fg = colors.fg_dark, bg = colors.bg_dark })
 		safe_set_hl("BufferVisibleMod", { fg = colors.yellow, bg = colors.bg_dark })
 		safe_set_hl("BufferVisibleSign", { fg = colors.fg_dark, bg = colors.bg_dark })
