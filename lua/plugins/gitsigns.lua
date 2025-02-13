@@ -3,59 +3,127 @@
 -- config. This will add also the recommended keymaps.
 
 return {
-	{
-		"lewis6991/gitsigns.nvim",
-		opts = {
-			on_attach = function(bufnr)
-				local gitsigns = require("gitsigns")
-
-				local function map(mode, l, r, opts)
-					opts = opts or {}
-					opts.buffer = bufnr
-					vim.keymap.set(mode, l, r, opts)
-				end
-
-				-- Navigation
-				map("n", "]c", function()
-					if vim.wo.diff then
-						vim.cmd.normal({ "]c", bang = true })
-					else
-						gitsigns.nav_hunk("next")
-					end
-				end, { desc = "Jump to next git [c]hange" })
-
-				map("n", "[c", function()
-					if vim.wo.diff then
-						vim.cmd.normal({ "[c", bang = true })
-					else
-						gitsigns.nav_hunk("prev")
-					end
-				end, { desc = "Jump to previous git [c]hange" })
-
-				-- Actions
-				-- visual mode
-				map("v", "<leader>hs", function()
-					gitsigns.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
-				end, { desc = "git [s]tage hunk" })
-				map("v", "<leader>hr", function()
-					gitsigns.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
-				end, { desc = "git [r]eset hunk" })
-				-- normal mode
-				map("n", "<leader>hs", gitsigns.stage_hunk, { desc = "git [s]tage hunk" })
-				map("n", "<leader>hr", gitsigns.reset_hunk, { desc = "git [r]eset hunk" })
-				map("n", "<leader>hS", gitsigns.stage_buffer, { desc = "git [S]tage buffer" })
-				map("n", "<leader>hu", gitsigns.undo_stage_hunk, { desc = "git [u]ndo stage hunk" })
-				map("n", "<leader>hR", gitsigns.reset_buffer, { desc = "git [R]eset buffer" })
-				map("n", "<leader>hp", gitsigns.preview_hunk, { desc = "git [p]review hunk" })
-				map("n", "<leader>hb", gitsigns.blame_line, { desc = "git [b]lame line" })
-				map("n", "<leader>hd", gitsigns.diffthis, { desc = "git [d]iff against index" })
-				map("n", "<leader>hD", function()
-					gitsigns.diffthis("@")
-				end, { desc = "git [D]iff against last commit" })
-				-- Toggles
-				map("n", "<leader>tb", gitsigns.toggle_current_line_blame, { desc = "[T]oggle git show [b]lame line" })
-				map("n", "<leader>tD", gitsigns.toggle_deleted, { desc = "[T]oggle git show [D]eleted" })
-			end,
-		},
+	"romgrk/barbar.nvim",
+	dependencies = {
+		"nvim-tree/nvim-web-devicons",
+		"moll/vim-bbye",
 	},
+	version = "^1.0.0",
+	init = function()
+		vim.g.barbar_auto_setup = false
+	end,
+	config = function()
+		local colors = {}
+		local function set_colors()
+			colors.bg = vim.api.nvim_get_hl(0, { name = "Normal" }).bg or 0
+			colors.fg = vim.api.nvim_get_hl(0, { name = "Normal" }).fg or 0
+			colors.bg_dark = vim.api.nvim_get_hl(0, { name = "NormalFloat" }).bg or 0
+			colors.fg_bright = vim.api.nvim_get_hl(0, { name = "Special" }).fg or 0
+			colors.yellow = vim.api.nvim_get_hl(0, { name = "DiagnosticWarn" }).fg or 0
+			colors.red = vim.api.nvim_get_hl(0, { name = "DiagnosticError" }).fg or 0
+			colors.accent = vim.api.nvim_get_hl(0, { name = "Function" }).fg or 0
+			colors.fg_dark = "#c0c0c0"
+		end
+		set_colors()
+
+		require("barbar").setup({
+			animation = false, -- Disabled animations
+			auto_hide = false,
+			tabpages = true,
+			clickable = true,
+			exclude_ft = {
+				"neo-tree",
+				"Trouble",
+			},
+			icons = {
+				buffer_index = false,
+				buffer_number = false,
+				button = "λ",
+				preset = "slanted", -- Re-enabled slanted preset
+				diagnostics = {
+					[vim.diagnostic.severity.ERROR] = { enabled = false },
+					[vim.diagnostic.severity.WARN] = { enabled = false },
+					[vim.diagnostic.severity.INFO] = { enabled = false },
+					[vim.diagnostic.severity.HINT] = { enabled = false },
+				},
+				gitsigns = {
+					added = { enabled = false },
+					changed = { enabled = false },
+					deleted = { enabled = false },
+				},
+				filetype = {
+					custom_colors = false,
+					enabled = true,
+				},
+				separator = { left = "", right = "" }, -- Removed separators
+				separator_at_end = true,
+			},
+			sidebar_filetypes = {
+				["snacks_layout_box"] = {
+					text = "blλack mesa",
+					event = "BufWinEnter",
+					align = "center",
+				},
+				["snacks.explorer"] = {
+					text = "snacks.explorer",
+					event = "BufWinEnter",
+					align = "center",
+				},
+				["neo-tree"] = { text = "Neo-Tree" },
+				["nterm"] = {
+					text = "Terminal",
+					event = "BufWinEnter",
+				},
+			},
+			focus_on_close = "previous",
+			hide = { inactive = false },
+			highlight_visible = true,
+			highlight_alternate = false,
+			highlight_inactive_file_icons = false,
+			no_name_title = "New Buffer",
+		})
+
+		local function safe_set_hl(name, opts)
+			pcall(vim.api.nvim_set_hl, 0, name, opts)
+		end
+
+		-- Set background colors for all parts of each tab state
+		safe_set_hl("BufferCurrent", { fg = colors.fg_bright, bg = colors.bg, bold = true })
+		safe_set_hl("BufferCurrentMod", { fg = colors.yellow, bg = colors.bg, bold = true })
+		safe_set_hl("BufferCurrentSign", { fg = colors.accent, bg = colors.bg })
+		safe_set_hl("BufferCurrentIcon", { fg = colors.fg_bright, bg = colors.bg })
+		safe_set_hl("BufferCurrentERROR", { fg = colors.red, bg = colors.bg })
+		safe_set_hl("BufferCurrentWARN", { fg = colors.yellow, bg = colors.bg })
+
+		-- Make visible and inactive tabs look the same
+		safe_set_hl("BufferVisible", { fg = colors.fg_dark, bg = colors.bg_dark })
+		safe_set_hl("BufferVisibleMod", { fg = colors.yellow, bg = colors.bg_dark })
+		safe_set_hl("BufferVisibleSign", { fg = colors.fg_dark, bg = colors.bg_dark })
+		safe_set_hl("BufferVisibleIcon", { fg = colors.fg_dark, bg = colors.bg_dark })
+		safe_set_hl("BufferVisibleERROR", { fg = colors.red, bg = colors.bg_dark })
+		safe_set_hl("BufferVisibleWARN", { fg = colors.yellow, bg = colors.bg_dark })
+
+		safe_set_hl("BufferInactive", { fg = colors.fg_dark, bg = colors.bg_dark })
+		safe_set_hl("BufferInactiveMod", { fg = colors.yellow, bg = colors.bg_dark })
+		safe_set_hl("BufferInactiveSign", { fg = colors.fg_dark, bg = colors.bg_dark })
+		safe_set_hl("BufferInactiveIcon", { fg = colors.fg_dark, bg = colors.bg_dark })
+		safe_set_hl("BufferInactiveERROR", { fg = colors.red, bg = colors.bg_dark })
+		safe_set_hl("BufferInactiveWARN", { fg = colors.yellow, bg = colors.bg_dark })
+
+		safe_set_hl("BufferTabpageFill", { fg = colors.fg, bg = colors.bg_dark })
+
+		local map = vim.api.nvim_set_keymap
+		local opts = { noremap = true, silent = true }
+		map("n", "<A-,>", "<Cmd>BufferPrevious<CR>", opts)
+		map("n", "<A-.>", "<Cmd>BufferNext<CR>", opts)
+
+		vim.api.nvim_create_augroup("BarbarConfig", { clear = true })
+		vim.api.nvim_create_autocmd("ColorScheme", {
+			group = "BarbarConfig",
+			callback = function()
+				set_colors()
+				require("barbar").setup({})
+			end,
+		})
+	end,
 }
