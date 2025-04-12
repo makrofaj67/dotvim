@@ -45,7 +45,7 @@ return {
 			},
 			debug = { enabled = true },
 			dim = { enabled = true },
-			explorer = { enabled = true },
+			explorer = { enabled = false },
 			git = { enabled = true },
 			gitbrowse = { enabled = true },
 			image = { enabled = true },

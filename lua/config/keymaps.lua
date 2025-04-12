@@ -1,6 +1,25 @@
 require("config.smartescape")
 vim.g.smart_escape_timeout = 200 -- milliseconds
 vim.g.smart_escape_visual_feedback = true
+-- Keyboard users
+vim.keymap.set("n", "<C-t>", function()
+	require("menu").open("default")
+end, {})
+
+-- mouse users + nvimtree users!
+vim.keymap.set({ "n", "v" }, "<RightMouse>", function()
+	require("menu.utils").delete_old_menus()
+
+	vim.cmd.exec('"normal! \\<RightMouse>"')
+
+	-- clicked buf
+	local buf = vim.api.nvim_win_get_buf(vim.fn.getmousepos().winid)
+	local options = vim.bo[buf].ft == "NvimTree" and "nvimtree" or "default"
+
+	require("menu").open(options, { mouse = true })
+end, {})
+-- Keyboard users
+
 -- -- Disable the spacebar key's default behavior in Normal and Visual modes
 -- vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
 --

@@ -54,7 +54,7 @@ return {
 				separator_at_end = true,
 			},
 			sidebar_filetypes = {
-				snacks_layout_box = { text = "blλack mesa", align = "center" },
+				["neo-tree"] = { text = "blλack mesa", align = "center" },
 			},
 			focus_on_close = "previous",
 			hide = { inactive = false },
@@ -87,7 +87,7 @@ return {
 		safe_set_hl("BufferInactiveSign", { fg = colors.fg_dark, bg = colors.bg_dark })
 		safe_set_hl("BufferInactiveIcon", { fg = colors.fg_dark, bg = colors.bg_dark })
 		safe_set_hl("BufferInactiveERROR", { fg = colors.red, bg = colors.bg_dark })
-		safe_set_hl("BufferInactiveWARN", { fg = colors.yellow, bg = colors.bg_dark })
+		safe_set_hl("BufferInactiveWARN", { fg = colors.green, bg = colors.bg_dark })
 
 		safe_set_hl("BufferTabpageFill", { fg = colors.fg, bg = colors.bg_dark })
 
