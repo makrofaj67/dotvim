@@ -55,6 +55,7 @@ return {
 			},
 			sidebar_filetypes = {
 				["neo-tree"] = { text = "blλack mesa", align = "center" },
+				snacks_layout_box = { text = "blλack mesa", align = "center" },
 			},
 			focus_on_close = "previous",
 			hide = { inactive = false },

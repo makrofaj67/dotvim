@@ -22,7 +22,7 @@ return {
 	require("plugins.gitsigns"),
 	require("plugins.indent_blankline"),
 	require("plugins.42"),
-	require("plugins.neo-tree"),
+	-- require("plugins.neo-tree"),
 	require("plugins.menu"),
 	-- require("plugins.copilot"),
 	-- require("plugins.precognition"),

@@ -65,7 +65,7 @@ return {
 				},
 			},
 
-			use_default_keymaps = true,
+			use_default_keymaps = false,
 			keymaps = {
 				toggle = "<A-t>",
 				new_vertical = "<C-\\>",
