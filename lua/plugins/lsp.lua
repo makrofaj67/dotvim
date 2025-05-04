@@ -103,6 +103,30 @@ return {
 						-- CMake: cmake .. -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
 						-- Mason: make compiledb
 						-- Bear: bear -- <build command>
+						filetypes = {"c", "cpp", "h", "hpp", "objc", "objcpp"},
+						root_dir = function(fname)
+							-- Git reposunu, Makefile ve diğer proje dosyalarını otomatik olarak tespit et
+							local util = require("lspconfig.util")
+							return util.root_pattern("Makefile", ".git", "compile_commands.json", "compile_flags.txt")(fname) or
+								util.find_git_ancestor(fname) or
+								util.path.dirname(fname)
+						end,
+						-- Eğer compile_commands.json bulunmuyorsa otomatik oluşturmayı dene
+						on_new_config = function(new_config, new_root_dir)
+							-- Özel komutlar eklenebilir
+							if vim.fn.filereadable(new_root_dir .. "/compile_commands.json") == 0 and
+							   vim.fn.filereadable(new_root_dir .. "/Makefile") == 1 then
+								-- compile_commands.json yoksa ve Makefile varsa, bear ile oluşturmayı dene
+								vim.notify("clangd: compile_commands.json bulunamadı, oluşturmayı deneyin. Örneğin:\n" ..
+									"   cd " .. new_root_dir .. " && bear -- make", vim.log.levels.WARN)
+							end
+						end,
+						init_options = {
+							clangdFileStatus = true,
+							completeUnimported = true,
+							semanticHighlighting = true,
+						},
+						cmd = {"clangd", "--background-index", "--clang-tidy", "--header-insertion=iwyu"},
 					},
 					-- C#
 					omnisharp = {
