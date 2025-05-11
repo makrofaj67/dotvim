@@ -7,7 +7,13 @@ return {
 		event = { "BufReadPre", "BufNewFile" }, -- LSP'yi dosya açıldığında yükle
 		dependencies = {
 			-- Temel araçlar: Mason ve köprüleri
-			{ "williamboman/mason.nvim", opts = {} }, -- Mason'u önce yükle
+			{
+				"williamboman/mason.nvim",
+				cmd = { "Mason", "MasonInstall", "MasonInstallAll", "MasonUpdate", "MasonLog", "MasonUninstall", "MasonBrowse" },
+				config = function()
+					require("mason").setup({})
+				end,
+			}, -- Mason'u önce yükle
 			"williamboman/mason-lspconfig.nvim",    -- Mason ve lspconfig köprüsü
 			"WhoIsSethDaniel/mason-tool-installer.nvim", -- Araçları otomatik kurar
 
