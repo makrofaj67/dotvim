@@ -112,6 +112,15 @@ return {
 			picker = { enabled = true },
 			profiler = { enabled = false },
 			quickfile = { enabled = true },
+			references = {
+				enabled = true,
+				jump_type = "all", -- "all", "definition", "implementation", "reference" - Hangi tür referanslar arasında gezineceğini belirtir
+				icons = {
+					definition = "󰳽 ",  -- tanım ikonu
+					implementation = "󰡱 ", -- implementasyon ikonu
+					reference = "󰌹 ",    -- referans ikonu
+				}
+			},
 			rename = { enabled = true },
 			scope = { enabled = true },
 			scratch = { enabled = true },
